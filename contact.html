@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Contact with rebru </title>
+
+    <!-- Import Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Import Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="contact-page">
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+    </script>
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <img src="Glogo.png" alt="logo Rebru.id" class="logo" />
+      </div>
+
+      <!-- Tombol hamburger -->
+      <button class="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="products.html">Product</a>
+        <a href="about.html">About</a>
+
+        <a href="contact.html" class="cta-button">Get in Touch</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="form">
+
+        <h2>Get in Touch</h2>
+        <p>Have a question or want to collaborate ? Fill out in the form below and we'll get back to you soon.</p>
+
+        <form id="contact-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" rows="5" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+          <strong><p><i class="fas fa-envelope"></i>rebruid@gmail.com</p></strong>
+          <strong><p><i class="fas fa-phone"></i>WhatsApp: +6285237390994</p>
+          <strong><p><i class="fas fa-map-marker-alt"></i>Address: Jl. -------------------, Makassar </p></strong>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 rebru. All Rights Reserved.</p>
+        Follow us on |
+        <a href="https://www.instagram.com/rebru.id?utm_source=ig_web_button_share_sheet&igsh=bTdjcnY0cmd6NzRz" 
+          class="social-icon" 
+          rel="noopener noreferrer" 
+          target="_blank"
+          aria-label="Instagram">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+          <span><strong>Instagram</strong></span>
+        </a> 
+      </p>
+    </footer>
+
+  </body>
+</html>

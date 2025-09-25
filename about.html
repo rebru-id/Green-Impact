@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Contact with rebru</title>
+
+    <!-- Import Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Import Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="about-page">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <img src="Glogo.png" alt="logo Rebru.id" class="logo" />
+      </div>
+
+      <!-- Tombol hamburger -->
+      <button class="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="products.html">Product</a>
+        <a href="about.html" class="active">About</a>
+
+        <a href="contact.html" class="cta-button">Get in Touch</a>
+      </nav>
+    </header>
+
+    <main class="about">
+      <section id="about-us">
+        <h1>
+          <i>
+            <strong> About Us </strong>
+          </i>
+        </h1>
+
+        <article>
+          <p>
+            Every year, millions of tons of coffee grounds end up in landfills.
+            When left to decompose alongside other organic waste, these grounds
+            release methane gas—one of the most harmful greenhouse gases driving
+            climate change. In a city like Makassar, where coffee culture is
+            rapidly growing, this challenge becomes even more visible: from
+            cafés to households, coffee waste keeps piling up every single day.
+          </p>
+        </article>
+
+        <article>
+          <p>
+            For us, coffee waste is not the end of the story. It is the
+            beginning of a new journey. What many see as residue, we see as an
+            opportunity to give a second life. We believe that what is often
+            overlooked can be transformed into something useful, valuable, and
+            even beautiful when handled with care.
+          </p>
+        </article>
+
+        <article>
+          <p>
+            Behind every product we create—from soap, candles, and car
+            fragrances to biochar—lies a simple conviction: nothing should go to
+            waste. Every grain of coffee grounds carries a story, and through
+            the right hands, that story can be rewritten into a solution for our
+            planet.
+          </p>
+        </article>
+
+        <article>
+          <p>
+            Rebru stands as a reminder to all of us: from the small remnants
+            left in your coffee cup, we can spark big changes that protect the
+            environment, empower communities, and build a greener future.
+          </p>
+        </article>
+
+        <article>
+          <p>
+            And now, we invite you to be part of this journey. Whether you are a
+            coffee shop, a business, or an individual who cares about the
+            planet, your involvement matters. Together, we can ensure that no
+            coffee waste goes to waste—and that every cup contributes to a more
+            sustainable tomorrow.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy;2025 rebru. All Rights Reserved.</p>
+      Follow us on |
+      <a
+        href="https://www.instagram.com/rebru.id?utm_source=ig_web_button_share_sheet&igsh=bTdjcnY0cmd6NzRz"
+        class="social-icon"
+        rel="noopener noreferrer"
+        target="_blank"
+        aria-label="Instagram"
+      >
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+        <span><strong>Instagram</strong></span>
+      </a>
+    </footer>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
