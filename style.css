@@ -131,7 +131,6 @@ body.home-page nav a:hover {
 }
 
 body.home-page .menu-toggle {
-  display: none; /* default sembunyi di desktop */
   background: none;
   border: none;
   font-size: 1.8rem;
@@ -405,3 +404,4 @@ footer a {
   color: #e1306c; /* contoh warna instagram */
   background: rgba(255, 255, 255, 0.06); /* subtle background */
 }
+
