@@ -59,9 +59,8 @@
               Setiap batang sabun Rebru lahir dari ampas kopi yang sudah selesai
               menyeduh cerita di cangkirmu. Dengan sentuhan alami, sabun ini
               tidak hanya membersihkan kulit, tetapi juga menghadirkan
-              pengalaman yang ramah lingkungan.Teksturnya lembut, aromanya
-              menenangkan, dan kandungan kopi di dalamnya membantu eksfoliasi
-              secara alami.
+              pengalaman yang ramah lingkungan. Teksturnya lembut, aromanya
+              menenangkan.
             </p>
 
             <div class="product-action" data-price="35000">
@@ -91,6 +90,59 @@
                 </button>
               </div>
             </div>
+            <div class="product-details">
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Berat Bersih <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                  <p>100 gram (per batang)</p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Spesifikasi & Bahan <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                  <ul>
+                    <li>
+                      <strong>Bahan Utama:</strong> Minyak Kelapa Murni (VCO),
+                      Minyak Zaitun, Ampas Kopi Robusta (Upcycled), Lye (NaOH),
+                      Aquades.
+                    </li>
+                    <li>
+                      <strong>Aroma:</strong> Kopi & Vanilla (Essential Oil).
+                    </li>
+                    <li>
+                      <strong>Fitur:</strong> Bebas SLS/Paraben, Vegan Friendly,
+                      Kemasan Kertas Daur Ulang.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Dampak Lingkungan <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                  <p>
+                    Setiap batang sabun ini menyelamatkan limbah yang berpotensi
+                    menghasilkan gas metana di TPA.
+                  </p>
+
+                  <div class="impact-highlight">
+                    <strong
+                      ><i class="fas fa-leaf"></i> 45g Ampas Kopi
+                      Diselamatkan</strong
+                    >
+                    Setara dengan mencegah pelepasan <strong>85g CO2e</strong>
+                    (Karbon Dioksida Ekuivalen) ke atmosfer.
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -110,9 +162,7 @@
             <p>
               Dari ampas kopi yang tersisa, kami menciptakan lilin dengan
               karakter unik: aroma hangat kopi yang berpadu dengan desain
-              estetik. Lilin Rebru bukan sekadar penerang ruangan, tetapi juga
-              simbol keberlanjutan—bahwa limbah bisa memiliki kehidupan kedua
-              yang bernilai.
+              estetik.
             </p>
 
             <div class="product-action" data-price="85000">
@@ -160,9 +210,7 @@
             <h2>3. Car Fragrance</h2>
             <p>
               Setiap perjalanan bisa menjadi lebih segar dan bermakna bersama
-              Rebru Car Fragrance. Terbuat dari limbah kopi yang diolah kembali,
-              pengharum mobil ini menghadirkan aroma khas kopi yang natural
-              tanpa bahan kimia berlebihan.
+              Rebru Car Fragrance.
             </p>
 
             <div class="product-action" data-price="45000">
@@ -210,9 +258,7 @@
             <h2>4. Biochar</h2>
             <p>
               Biochar adalah bukti nyata bahwa ampas kopi dapat memberi manfaat
-              jauh melampaui meja café. Dengan teknologi sederhana namun
-              berdampak besar, Rebru mengolah sisa kopi menjadi biochar—arang
-              aktif yang dapat menyuburkan tanah sekaligus menyerap karbon.
+              jauh melampaui meja café.
             </p>
 
             <div class="product-action" data-price="25000">
@@ -260,10 +306,7 @@
             <h2>5. Compost</h2>
             <p>
               Ampas kopi yang biasanya terbuang bisa menjadi sumber nutrisi
-              berharga bagi tanah. Melalui proses pengolahan alami, Rebru
-              mengubah limbah kopi menjadi kompos organik yang kaya unsur hara.
-              Kompos ini membantu memperbaiki struktur tanah dan meningkatkan
-              kesuburan.
+              berharga bagi tanah.
             </p>
 
             <div class="product-action" data-price="20000">
@@ -311,10 +354,7 @@
             <h2>6. Briquette</h2>
             <p>
               Rebru menghadirkan briket ramah lingkungan sebagai alternatif
-              energi terbarukan. Briket ini memiliki daya bakar tinggi, minim
-              asap, dan lebih bersih dibandingkan bahan bakar konvensional.
-              Cocok digunakan untuk kebutuhan rumah tangga maupun industri
-              kecil.
+              energi terbarukan.
             </p>
 
             <div class="product-action" data-price="15000">
@@ -362,9 +402,7 @@
             <h2>7. Eco-Goods</h2>
             <p>
               Lebih dari sekadar produk, Rebru juga menghadirkan berbagai
-              eco-goods hasil upcycle dari limbah kopi. Dari aksesori hingga
-              barang fungsional sehari-hari, semua dirancang dengan filosofi
-              Useful, Durable, Beautiful.
+              eco-goods hasil upcycle dari limbah kopi.
             </p>
 
             <div class="product-action" data-price="120000">
@@ -425,22 +463,28 @@
       import * as THREE from "three";
       import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-      // --- A. LOGIKA KALKULASI HARGA ---
+      // ===============================================
+      // 1. LOGIKA KALKULASI HARGA & QUANTITY
+      // ===============================================
       function initPriceCalculator() {
         const productActions = document.querySelectorAll(".product-action");
 
         productActions.forEach((action) => {
+          // Ambil elemen
           const basePrice = parseInt(action.getAttribute("data-price"));
           const qtyInput = action.querySelector(".qty-input");
           const minusBtn = action.querySelector(".minus");
           const plusBtn = action.querySelector(".plus");
           const totalDisplay = action.querySelector(".total-display");
 
-          // Fungsi update tampilan harga
+          // PERBAIKAN PENTING: Cek jika elemen ada. Jika tidak, skip.
+          // Ini mencegah error "null" yang mematikan seluruh script.
+          if (!qtyInput || !minusBtn || !plusBtn || !totalDisplay) return;
+
+          // Fungsi update tampilan
           function updatePrice() {
             const qty = parseInt(qtyInput.value);
             const total = basePrice * qty;
-            // Format Rupiah
             totalDisplay.textContent = "Rp " + total.toLocaleString("id-ID");
           }
 
@@ -462,10 +506,35 @@
         });
       }
 
-      // Jalankan Kalkulator
-      initPriceCalculator();
+      // ===============================================
+      // 2. LOGIKA ACCORDION (PRODUCT DETAILS)
+      // ===============================================
+      function initAccordion() {
+        const accHeaders = document.querySelectorAll(".accordion-header");
 
-      // --- B. LOGIKA SLIDE 3D/2D ---
+        accHeaders.forEach((header) => {
+          header.addEventListener("click", () => {
+            // Toggle class active untuk panah
+            header.classList.toggle("active");
+
+            // Buka/Tutup panel
+            const content = header.nextElementSibling;
+            if (header.classList.contains("active")) {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+              content.style.maxHeight = 0;
+            }
+          });
+        });
+      }
+
+      // Jalankan fungsi
+      initPriceCalculator();
+      initAccordion();
+
+      // ===============================================
+      // 3. LOGIKA SLIDE 3D & 2D
+      // ===============================================
       function initSlide(container) {
         const type = container.getAttribute("data-type");
         const src = container.getAttribute("data-src");
@@ -573,9 +642,11 @@
         animate();
       }
 
+      // Init Slides
       const slides = document.querySelectorAll(".slide-item");
       slides.forEach((slide) => initSlide(slide));
 
+      // Init Hamburger Menu
       const menuToggle = document.querySelector(".menu-toggle");
       const nav = document.querySelector("nav");
       if (menuToggle && nav) {
