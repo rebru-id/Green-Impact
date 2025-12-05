@@ -344,7 +344,7 @@ body.blog-page {
 }
 
 .page-title {
-  text-align: center; /* Centered looks better usually */
+  text-align: left; /* Centered looks better usually */
   margin-bottom: 60px;
   font-size: 2.5rem;
   color: #0c2506;
