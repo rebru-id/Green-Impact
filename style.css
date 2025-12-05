@@ -375,7 +375,7 @@ footer {
 }
 
 /* ============================================== */
-/* PRODUCT PAGE STYLES (ZIG-ZAG + CAROUSEL)       */
+/* PRODUCT PAGE STYLES                            */
 /* ============================================== */
 
 #products-container {
@@ -391,21 +391,18 @@ footer {
   color: #0c2506;
 }
 
-/* 1. KARTU PRODUK (WRAPPER) */
+/* KARTU PRODUK (ZIG-ZAG) */
 .product-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 50px;
   margin-bottom: 80px;
-
-  /* Default: Gambar Kiri, Teks Kanan */
   flex-direction: row;
   text-align: left;
 }
 
-/* --- LOGIKA ZIG-ZAG --- */
-/* Produk Genap (2, 4, 6): Gambar Kanan, Teks Kiri */
+/* Genap: Gambar Kanan, Teks Kiri */
 .product-card:nth-child(even) {
   flex-direction: row-reverse;
   text-align: right;
@@ -426,47 +423,127 @@ footer {
   font-size: 1rem;
 }
 
-/* ================= CAROUSEL / SLIDER STYLES ================= */
+/* --- FITUR PEMBELIAN (BARU) --- */
+.product-action {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
 
-/* A. FRAME LUAR (WADAH UTAMA) */
+/* Tag Harga Satuan */
+.price-tag {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ff8200; /* Warna Oranye */
+  margin-bottom: 15px;
+}
+
+.action-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Selector Jumlah (+/-) */
+.qty-selector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.qty-btn {
+  background: #f4f4f4;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.qty-btn:hover {
+  background: #ddd;
+}
+
+.qty-input {
+  width: 40px;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  /* Hapus panah input number */
+  -moz-appearance: textfield;
+}
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Tombol Keranjang Beli */
+.btn-buy {
+  background: #38a860;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-buy:hover {
+  background: #2e8b4e;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(56, 168, 96, 0.4);
+}
+
+.total-display {
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Align kanan untuk produk genap (ZigZag support) */
+.product-card:nth-child(even) .action-controls {
+  justify-content: flex-end; /* Geser tombol ke kanan */
+}
+
+/* ================= SLIDER STYLES ================= */
 .product-frame-wrapper {
   width: 350px;
   height: 350px;
   background: #f4f4f4;
   border-radius: 20px;
-  /* Efek Neumorphism */
   box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
-  flex-shrink: 0; /* Agar tidak mengecil */
+  flex-shrink: 0;
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease;
 }
-
 .product-frame-wrapper:hover {
   transform: translateY(-5px);
 }
 
-/* B. TRACK (JALUR GESER) */
 .slider-track {
-  display: flex; /* Berjejer horisontal */
-  overflow-x: auto; /* Scroll samping aktif */
-  scroll-snap-type: x mandatory; /* Snap effect */
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   width: 100%;
   height: 100%;
-
-  /* Sembunyikan Scrollbar */
   scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 .slider-track::-webkit-scrollbar {
   display: none;
 }
 
-/* C. SLIDE ITEM (ISI KONTEN) */
 .slide-item {
-  flex: 0 0 100%; /* Wajib 100% lebar parent */
+  flex: 0 0 100%;
   height: 100%;
-  scroll-snap-align: center; /* Berhenti di tengah */
+  scroll-snap-align: center;
   position: relative;
   display: flex;
   align-items: center;
@@ -474,7 +551,6 @@ footer {
   overflow: hidden;
 }
 
-/* D. INDIKATOR DOTS */
 .slider-indicators {
   position: absolute;
   bottom: 15px;
@@ -491,19 +567,16 @@ footer {
   border-radius: 50%;
 }
 
-/* --- Style Gambar 2D --- */
 .slide-item img.img-2d {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
-/* Efek Zoom saat hover */
 .product-frame-wrapper:hover img.img-2d {
   transform: scale(1.1);
 }
 
-/* --- Style 3D Canvas --- */
 .slide-item canvas {
   width: 100% !important;
   height: 100% !important;
@@ -514,16 +587,16 @@ footer {
   cursor: grabbing;
 }
 
-/* Responsif Mobile */
 @media (max-width: 768px) {
-  /* Di HP, hilangkan efek zig-zag (selalu gambar di atas) */
   .product-card,
   .product-card:nth-child(even) {
     flex-direction: column !important;
     text-align: center !important;
     gap: 20px;
   }
-
+  .product-card:nth-child(even) .action-controls {
+    justify-content: center;
+  }
   .product-frame-wrapper {
     width: 100%;
     max-width: 300px;
@@ -561,3 +634,4 @@ footer a {
   color: #e1306c; /* contoh warna instagram */
   background: rgba(255, 255, 255, 0.06); /* subtle background */
 }
+
