@@ -6,9 +6,7 @@
     <title>Products - Rebru</title>
 
     <!-- Import Favorite Icon -->
-    <link rel="icon" 
-      type="image/png" href="assets/img/favicon.png"
-    />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
@@ -18,26 +16,28 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body class="product-page">
     <header>
-      <div class="brand">
-        <img src="assets/img/Glogo.png" alt="logo Rebru.id" class="logo" />
+      <div class="container">
+        <div class="brand">
+          <img src="assets/img/Glogo.png" alt="logo Rebru.id" class="logo" />
+        </div>
+
+        <button class="menu-toggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="products.html" class="active">Product</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html" class="cta-button">Get in Touch</a>
+        </nav>
       </div>
-
-      <button class="menu-toggle" aria-label="Toggle Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="products.html" class="active">Product</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="cta-button">Get in Touch</a>
-      </nav>
     </header>
 
     <main class="Products">
@@ -574,7 +574,7 @@
         </article>
 
         <!-- ECO-GOODS -->
-        <article class="product-card out-of-stock">
+        <!-- <article class="product-card out-of-stock">
           <div class="product-frame-wrapper">
             <div class="slider-track">
               <div
@@ -617,7 +617,7 @@
               </div>
             </div>
           </div>
-        </article>
+        </article> -->
       </section>
     </main>
 
@@ -1049,8 +1049,13 @@
             nav.classList.toggle("active")
           );
       });
+
+      // HEADER SCROLL
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        // Jika scroll lebih dari 50px, tambah class 'scrolled'. Jika kurang, hapus.
+        header.classList.toggle("scrolled", window.scrollY > 50);
+      });
     </script>
   </body>
 </html>
-
-
