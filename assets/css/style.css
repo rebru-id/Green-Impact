@@ -1071,14 +1071,22 @@ body.about-page-clean li {
   align-items: center;
 }
 
-.intro-image {
+.intro-image-wrapper {
   width: 100%;
-  height: 500px;
-  background-color: #ddd;
-  background-image: url("../img/Glogo.png");
-  background-size: cover;
-  background-position: center;
+  height: auto; /* Tinggi otomatis mengikuti gambar */
   border-radius: 4px;
+  overflow: hidden; /* Agar sudut rounded gambar tetap terlihat */
+
+  /* Opsional: Shadow agar gambar lebih "pop" */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Class khusus untuk gambar agar responsif */
+.img-clean-responsive {
+  width: 100%; /* Lebar memenuhi kolom grid */
+  height: auto; /* Tinggi menyesuaikan proporsi aslinya */
+  display: block; /* Menghilangkan celah putih (gap) di bawah gambar */
+  object-fit: contain; /* Menjaga proporsi */
 }
 
 .section-label {
