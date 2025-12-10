@@ -2,133 +2,269 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>About Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Rebru</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
-    <link rel="icon" 
-      type="image/png" href="assets/img/favicon.png"
-    />
-
-    <!-- Import Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Import Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="about-page">
-    <!-- Header -->
+
+  <body class="about-page-clean">
     <header>
-      <div class="brand">
-        <img src="assets/img/Glogo.png" alt="logo Rebru.id" class="logo" />
+      <div class="container">
+        <div class="brand">
+          <img src="assets/img/Glogo.png" alt="Rebru Logo" class="logo" />
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="about.html" class="active">About</a>
+          <a href="products.html">Product</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html" class="cta-button">Get in Touch</a>
+        </nav>
       </div>
-
-      <!-- Tombol hamburger -->
-      <button class="menu-toggle" aria-label="Toggle Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="products.html">Product</a>
-        <a href="about.html" class="active">About</a>
-
-        <a href="contact.html" class="cta-button">Get in Touch</a>
-      </nav>
     </header>
 
-    <main class="about">
-      <section id="about-us">
-        <h1>
-          <i>
-            <strong> About Us </strong>
-          </i>
-        </h1>
-
-        <article>
-          <p>
-            Every year, millions of tons of coffee grounds end up in landfills.
-            When left to decompose alongside other organic waste, these grounds
-            release methane gas—one of the most harmful greenhouse gases driving
-            climate change. In a city like Makassar, where coffee culture is
-            rapidly growing, this challenge becomes even more visible: from
-            cafés to households, coffee waste keeps piling up every single day.
+    <main>
+      <section class="about-hero">
+        <div class="container">
+          <h1>
+            Specializing in <span>Coffee Waste</span>.<br />Leading in
+            Climate<br />
+            Solutions.
+          </h1>
+          <p class="subtitle">
+            Rebru transforms spent coffee grounds into biochar, compost, and
+            sustainable materials while supporting broader circular economy
+            goals.
           </p>
-        </article>
+        </div>
+      </section>
 
-        <article>
-          <p>
-            For us, coffee waste is not the end of the story. It is the
-            beginning of a new journey. What many see as residue, we see as an
-            opportunity to give a second life. We believe that what is often
-            overlooked can be transformed into something useful, valuable, and
-            even beautiful when handled with care.
-          </p>
-        </article>
+      <section class="intro">
+        <div class="container intro-grid">
+          <div class="intro-text">
+            <span class="section-label">About Rebru</span>
+            <h2>From Residue to Ritual</h2>
+            <p>
+              At Rebru, we specialize in transforming spent coffee grounds into
+              high-value climate products and regenerative materials. Based in
+              <strong>Makassar, South Sulawesi</strong>, we are one of the first
+              startups in the region addressing the rapidly growing challenge of
+              coffee waste.
+            </p>
+            <p>
+              Our core expertise lies in collecting, processing, and upgrading
+              spent coffee grounds into impactful products such as biochar,
+              compost, and bio-briquettes.
+            </p>
+          </div>
+          <div class="intro-image"></div>
+        </div>
+      </section>
 
-        <article>
-          <p>
-            Behind every product we create—from soap, candles, and car
-            fragrances to biochar—lies a simple conviction: nothing should go to
-            waste. Every grain of coffee grounds carries a story, and through
-            the right hands, that story can be rewritten into a solution for our
-            planet.
-          </p>
-        </article>
+      <section class="values">
+        <div class="container values-grid">
+          <div class="value-card">
+            <h3>Our Mission</h3>
+            <p>
+              To become Indonesia’s leading innovator in coffee-waste
+              circularity - while expanding regenerative solutions that utilize
+              organic waste responsibly.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Our Vision</h3>
+            <p>
+              To turn coffee waste and other underutilized organic resources
+              into regenerative materials that restore soil, reduce emissions,
+              and drive a circular, low-carbon economy.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <article>
-          <p>
-            Rebru stands as a reminder to all of us: from the small remnants
-            left in your coffee cup, we can spark big changes that protect the
-            environment, empower communities, and build a greener future.
-          </p>
-        </article>
+      <section class="why-coffee">
+        <div class="container">
+          <span class="section-label">The Core Problem</span>
+          <h2>Why Coffee Waste Is Our Focus?</h2>
+          <div class="reason-grid">
+            <div class="reason-item">
+              <span class="reason-number">01</span>
+              <h4>High Volume</h4>
+              <p>
+                Coffee consumption in Indonesia is the highest in Southeast
+                Asia, creating consistent, predictable waste volumes.
+              </p>
+            </div>
+            <div class="reason-item">
+              <span class="reason-number">02</span>
+              <h4>Hidden Emissions</h4>
+              <p>
+                Spent coffee grounds are an underestimated methane emitter when
+                left to decompose in landfills.
+              </p>
+            </div>
+            <div class="reason-item">
+              <span class="reason-number">03</span>
+              <h4>High Potential</h4>
+              <p>
+                High-quality biochar and clean energy can be produced from SCG
+                (Spent Coffee Grounds) when processed correctly.
+              </p>
+            </div>
+          </div>
+          <div class="secondary-process">
+            <h4>What Else We Process</h4>
+            <p>
+              To support composting and biochar production, we integrate
+              complementary organic waste.
+            </p>
+            <div class="tag-container">
+              <span class="tag">Rice Husk</span
+              ><span class="tag">Corn Husk</span
+              ><span class="tag">Cocoa Waste</span
+              ><span class="tag">Coconut Shells</span
+              ><span class="tag">Biomass</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <article>
-          <p>
-            And now, we invite you to be part of this journey. Whether you are a
-            coffee shop, a business, or an individual who cares about the
-            planet, your involvement matters. Together, we can ensure that no
-            coffee waste goes to waste—and that every cup contributes to a more
-            sustainable tomorrow.
-          </p>
-        </article>
+      <section class="clean-showcase">
+        <div class="container">
+          <span class="section-label">Our Solutions</span>
+          <h2>Circular Innovations</h2>
+          <div class="clean-grid">
+            <div class="clean-card">
+              <i class="fa-solid fa-leaf fa-2x"></i>
+              <h4>Biochar</h4>
+              <p>
+                Improves soil health, increases water retention, and locks
+                carbon for centuries.
+              </p>
+            </div>
+            <div class="clean-card">
+              <i class="fa-solid fa-seedling fa-2x"></i>
+              <h4>Compost</h4>
+              <p>
+                Organic fertilizer made from coffee grounds blended with
+                restaurant waste.
+              </p>
+            </div>
+            <div class="clean-card">
+              <i class="fa-solid fa-fire fa-2x"></i>
+              <h4>Bio-briquettes</h4>
+              <p>
+                Cleaner-burning briquettes using coffee waste as the primary
+                ingredient.
+              </p>
+            </div>
+            <div class="clean-card">
+              <i class="fa-solid fa-flask fa-2x" style="color: #d4a373"></i>
+              <h4>Raw Materials <span class="badge">In R&D</span></h4>
+              <p>
+                Biodegradable cups, blocks, and sustainable packaging
+                prototypes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="impact">
+        <div class="container impact-grid">
+          <div class="who-we-serve">
+            <h2>Who We Serve</h2>
+            <p>We collaborate with partners committed to sustainability:</p>
+            <ul class="impact-list">
+              <li>
+                <i class="fa-solid fa-check"></i> Gardeners & Agricultural
+                Sectors
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> SMEs & Manufacturing
+                Industries
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> FMCG Brands & State-owned
+                Enterprises
+              </li>
+              <li><i class="fa-solid fa-check"></i> Coffee Shops & Chains</li>
+            </ul>
+          </div>
+          <div class="our-impact">
+            <h2>Our Impact</h2>
+            <ul class="impact-list">
+              <li>
+                <i class="fa-solid fa-arrow-right"></i> Diverting coffee waste
+                from landfills
+              </li>
+              <li>
+                <i class="fa-solid fa-arrow-right"></i> Reducing methane
+                emissions
+              </li>
+              <li>
+                <i class="fa-solid fa-arrow-right"></i> Creating circular
+                economic value
+              </li>
+              <li>
+                <i class="fa-solid fa-arrow-right"></i> Empowering communities
+              </li>
+            </ul>
+          </div>
+        </div>
       </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-      <p>&copy;2025 rebru. All Rights Reserved.</p>
-      Follow us on |
-      <a
-        href="https://www.instagram.com/rebru.id?utm_source=ig_web_button_share_sheet&igsh=bTdjcnY0cmd6NzRz"
-        class="social-icon"
-        rel="noopener noreferrer"
-        target="_blank"
-        aria-label="Instagram"
-      >
-        <i class="fab fa-instagram" aria-hidden="true"></i>
-        <span><strong>Instagram</strong></span>
-      </a>
+      <div class="container">
+        <span class="footer-quote"
+          >"Every cup of coffee becomes a catalyst for climate
+          resilience."</span
+        >
+
+        <p>&copy; 2025 Rebru. All Rights Reserved.</p>
+        <p>
+          Follow us on |
+          <a
+            href="https://www.instagram.com/rebru.id"
+            class="social-icon"
+            target="_blank"
+          >
+            <i class="fab fa-instagram"></i>
+            <span><strong>Instagram</strong></span>
+          </a>
+        </p>
+      </div>
     </footer>
 
     <script>
       const menuToggle = document.querySelector(".menu-toggle");
       const nav = document.querySelector("nav");
+      menuToggle.addEventListener("click", () =>
+        nav.classList.toggle("active")
+      );
 
-      menuToggle.addEventListener("click", () => {
-        nav.classList.toggle("active");
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        // Jika scroll lebih dari 50px, tambah class 'scrolled'. Jika kurang, hapus.
+        header.classList.toggle("scrolled", window.scrollY > 50);
       });
     </script>
   </body>
 </html>
-
-
-
