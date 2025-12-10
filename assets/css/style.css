@@ -153,7 +153,7 @@ nav {
 
 nav a {
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase; /* Huruf kapital semua -> Elegan */
   letter-spacing: 1px; /* Spasi antar huruf */
   font-size: 0.85rem; /* Ukuran font sedikit lebih kecil & rapi */
@@ -162,13 +162,14 @@ nav a {
   color: var(--primary-green); /* Warna default (Halaman umum) */
   transition: all 0.3s ease;
   position: relative;
+  border: 1px solid transparent;
+
 }
 
 /* Efek Hover Simple */
 nav a:hover,
 nav a.active {
   color: var(--accent-orange);
-  font-weight: 600;
 }
 
 /* E. CTA Button (Get in Touch) */
@@ -182,9 +183,9 @@ nav a.cta-button {
 nav a.cta-button:hover {
   background: var(--primary-green);
   color: white;
+  border: 1px solid white;
   box-shadow: 0 4px 10px rgba(56, 168, 96, 0.2); /* Shadow halus */
   transform: translateY(-1px);
-  border: white;
 }
 
 /* F. Menu Toggle (Hamburger) - Default Hidden di Desktop */
