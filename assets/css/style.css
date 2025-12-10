@@ -174,7 +174,7 @@ nav a.active {
 /* E. CTA Button (Get in Touch) */
 nav a.cta-button {
   padding: 10px 24px;
-  border: 1px solid var(--primary-green);
+  border: 1px solid var(--accent-orange);
   border-radius: 4px; /* Sudut sedikit kotak (Clean Style) */
   font-weight: 600;
 }
@@ -184,6 +184,7 @@ nav a.cta-button:hover {
   color: white;
   box-shadow: 0 4px 10px rgba(56, 168, 96, 0.2); /* Shadow halus */
   transform: translateY(-1px);
+  border: white;
 }
 
 /* F. Menu Toggle (Hamburger) - Default Hidden di Desktop */
@@ -221,7 +222,7 @@ body.home-page nav a.active {
 
 /* Override Tombol CTA di Home (Border Putih) */
 body.home-page nav a.cta-button {
-  border-color: rgba(255, 255, 255, 0.8);
+  border-color: var(--accent-orange);
   color: white;
 }
 
@@ -229,6 +230,8 @@ body.home-page nav a.cta-button:hover {
   background: white;
   color: var(--primary-green-dark);
   border-color: white;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+  transform: translateX(-1px);
 }
 
 /* Override Tombol Hamburger di Home */
