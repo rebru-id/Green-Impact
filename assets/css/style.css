@@ -1075,7 +1075,7 @@ body.about-page-clean li {
   width: 100%;
   height: 500px;
   background-color: #ddd;
-  background-image: url("assets/img/Glogo.png");
+  background-image: url("../img/Glogo.png");
   background-size: cover;
   background-position: center;
   border-radius: 4px;
