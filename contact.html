@@ -27,6 +27,7 @@
 
     <!-- Header -->
     <header>
+      <div class="container">
       <div class="brand">
         <img src="assets/img/Glogo.png" alt="logo Rebru.id" class="logo" />
       </div>
@@ -38,12 +39,13 @@
 
       <nav>
         <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="products.html">Product</a>
         <a href="about.html">About</a>
+        <a href="products.html">Product</a>
+        <a href="blog.html">Blog</a>
 
         <a href="contact.html" class="cta-button">Get in Touch</a>
       </nav>
+      </div>
     </header>
 
     <main>
@@ -90,8 +92,15 @@
       menuToggle.addEventListener("click", () => {
         nav.classList.toggle("active");
       });
-    </script>
 
+      // HEADER SCROLL
+      window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    // Jika scroll lebih dari 50px, tambah class 'scrolled'. Jika kurang, hapus.
+    header.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    </script>
 
   </body>
 </html>
