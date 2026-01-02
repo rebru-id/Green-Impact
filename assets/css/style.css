@@ -293,6 +293,94 @@ body.blog-page {
   text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.75);
 }
 
+      /* ===== DASHBOARD LOGIN BUTTON (Modern & Minimalist) ===== */
+      .dashboard-login-btn {
+        position: fixed;
+        top: 100px;
+        right: 30px;
+        z-index: 999;
+        
+        /* Design */
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(56, 168, 96, 0.2);
+        border-radius: 50px;
+        padding: 12px 24px;
+        
+        /* Typography */
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #38a860;
+        text-decoration: none;
+        
+        /* Flexbox */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        
+        /* Effects */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        
+        /* Hover state preparation */
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Icon styling */
+      .dashboard-login-btn i {
+        font-size: 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      /* Hover effect */
+      .dashboard-login-btn:hover {
+        background: #38a860;
+        color: white;
+        border-color: #38a860;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(56, 168, 96, 0.3);
+      }
+
+      .dashboard-login-btn:hover i {
+        transform: translateX(3px);
+      }
+
+      /* Active/Click effect */
+      .dashboard-login-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(56, 168, 96, 0.2);
+      }
+
+      /* Responsive - Mobile */
+      @media (max-width: 768px) {
+        .dashboard-login-btn {
+          top: auto;
+          bottom: 100px;
+          right: 20px;
+          padding: 10px 20px;
+          font-size: 0.85rem;
+        }
+        
+        .dashboard-login-btn span {
+          display: none; /* Hide text on mobile, show only icon */
+        }
+        
+        .dashboard-login-btn {
+          width: 50px;
+          height: 50px;
+          padding: 0;
+          justify-content: center;
+          border-radius: 50%;
+        }
+        
+        .dashboard-login-btn i {
+          margin: 0;
+        }
+      }
+
 /* --- Blog Section --- */
 .blog-container {
   display: flex !important;
