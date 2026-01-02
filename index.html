@@ -4,60 +4,175 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home - Rebru</title>
-
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
   </head>
-
   <body class="home-page">
-    <header>
+    <!-- ===== ORIGINAL HEADER (untuk Landing Page) ===== -->
+    <header id="mainHeader">
       <div class="container">
         <div class="brand">
           <img src="assets/img/logo.png" alt="Rebru Logo" class="logo" />
         </div>
-
         <button class="menu-toggle" aria-label="Toggle Menu">
           <i class="fas fa-bars"></i>
         </button>
-
         <nav>
           <a href="index.html" class="active">Home</a>
           <a href="about.html">About</a>
           <a href="products.html">Product</a>
           <a href="blog.html">Blog</a>
-
           <a href="contact.html" class="cta-button">Get in Touch</a>
         </nav>
       </div>
     </header>
 
-    <main>
-      <section id="home">
-        <h1>
-          <i>
-            <strong>
-              Brewing Scalable Impact<br />
-              From Coffee Waste
-            </strong>
-          </i>
-        </h1>
+    <!-- ===== DASHBOARD HEADER (Hidden by default, muncul saat login) ===== -->
+    <div class="dashboard-header-wrapper" id="dashboardHeader" style="display: none;">
+      <div class="dashboard-header-container">
+        <div class="dashboard-logo">
+          <img src="assets/img/logo.png" alt="Rebru Logo" onclick="backToHome()" />
+        </div>
+        <div class="user-badge" id="userBadge">
+          <div class="user-info">
+            <span class="user-name" id="userName">Loading...</span>
+            <span class="user-role" id="userRole">Role</span>
+          </div>
+          <button class="logout-btn" onclick="handleLogout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+    </div>
 
-        <img src="assets/img/logo.png" alt="Rebru Logo Large" />
+    <main>
+      <!-- ===== LANDING PAGE VIEW (Default) ===== -->
+      <section id="homeView">
+        <section id="home">
+          <h1>
+            <i>
+              <strong>
+                Brewing Scalable Impact<br />
+                From Coffee Waste
+              </strong>
+            </i>
+          </h1>
+          <img src="assets/img/logo.png" alt="Rebru Logo Large" />
+        </section>
+        
+        <!-- Tombol untuk membuka dashboard -->
+        <div style="text-align: center; margin-top: 30px;">
+          <button 
+            onclick="openAuthModal()" 
+            style="
+              background: var(--accent-orange);
+              color: white;
+              padding: 15px 40px;
+              border: none;
+              border-radius: 8px;
+              font-size: 1.1rem;
+              font-weight: 600;
+              cursor: pointer;
+              box-shadow: 0 4px 15px rgba(255, 130, 0, 0.3);
+              transition: all 0.3s ease;
+            "
+            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(255, 130, 0, 0.4)'"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 130, 0, 0.3)'"
+          >
+            <i class="fas fa-chart-line"></i> See Details for Your Impact
+          </button>
+        </div>
       </section>
+
+      <!-- ===== DASHBOARD VIEW (Hidden by default) ===== -->
+      <div class="dashboard-view" id="dashboardView">
+        <div class="dashboard-content">
+          <!-- Tab Navigation -->
+          <div class="tab-navigation" id="tabNavigation">
+            <button class="tab-btn active" data-tab="home">
+              <i class="fas fa-home"></i> Dashboard Home
+            </button>
+            <button class="tab-btn" data-tab="log">
+              <i class="fas fa-list"></i> Contribution Log
+            </button>
+            <button class="tab-btn" data-tab="impact">
+              <i class="fas fa-leaf"></i> Impact Details
+            </button>
+            <button class="tab-btn" data-tab="esg">
+              <i class="fas fa-chart-bar"></i> ESG Scorecard
+            </button>
+            <button class="tab-btn" data-tab="report">
+              <i class="fas fa-file-download"></i> Reports
+            </button>
+            <button class="tab-btn" id="certificateTab" data-tab="certificate">
+              <i class="fas fa-certificate"></i> Certificate
+            </button>
+          </div>
+
+          <!-- Dashboard Content Area (akan diisi via JavaScript) -->
+          <div id="dashboardContentArea"></div>
+        </div>
+      </div>
     </main>
+
+    <!-- ===== LOGIN MODAL ===== -->
+    <div class="auth-modal" id="authModal">
+      <div class="auth-modal-content">
+        <button class="auth-modal-close" onclick="closeAuthModal()">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Login Form -->
+        <div id="loginFormContainer">
+          <h2><i class="fas fa-lock"></i> Login to Your Account</h2>
+          <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+            <div class="auth-form-group">
+              <label for="emailInput">Email / ID Contributor</label>
+              <input 
+                type="email" 
+                id="emailInput" 
+                required 
+                placeholder="Enter your email"
+                autocomplete="email"
+              />
+            </div>
+            <div class="auth-form-group">
+              <label for="passwordInput">Password</label>
+              <input 
+                type="password" 
+                id="passwordInput" 
+                required 
+                placeholder="Enter your password"
+                autocomplete="current-password"
+              />
+            </div>
+            <button type="submit" class="auth-btn-login">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+          </form>
+        </div>
+
+        <!-- Role Selection (Hidden until multi-role detected) -->
+        <div class="role-selection" id="roleSelectionContainer">
+          <h2><i class="fas fa-user-tag"></i> Select Your Role</h2>
+          <p>
+            Welcome, <strong id="roleUserName"></strong>! Please select your role:
+          </p>
+          <div class="role-options" id="roleOptionsContainer"></div>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <p>&copy; 2025 Rebru. All Rights Reserved.</p>
@@ -76,21 +191,887 @@
       </p>
     </footer>
 
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
+      // ==========================================
+      // MOBILE MENU TOGGLE (Original)
+      // ==========================================
       const menuToggle = document.querySelector(".menu-toggle");
       const nav = document.querySelector("nav");
+      
+      if (menuToggle && nav) {
+        menuToggle.addEventListener("click", () => {
+          nav.classList.toggle("active");
+        });
+      }
 
-      menuToggle.addEventListener("click", () => {
-        nav.classList.toggle("active");
-      });
-
-      // Script Sticky Header
+      // Sticky Header Script (Original)
       window.addEventListener("scroll", function () {
         const header = document.querySelector("header");
-        // Jika scroll lebih dari 50px, tambah class 'scrolled'. Jika kurang, hapus.
-        header.classList.toggle("scrolled", window.scrollY > 50);
+        if (header) {
+          header.classList.toggle("scrolled", window.scrollY > 50);
+        }
+      });
+
+      // ==========================================
+      // DUMMY USER DATABASE
+      // ==========================================
+      const usersDatabase = {
+        "cafe@xyz.com": {
+          password: "cafe123",
+          name: "Café XYZ",
+          roles: ["contributor"],
+          contributorData: {
+            name: "Café XYZ",
+            impactLevel: "GOLD ⭐⭐⭐",
+            wasteContributed: 1250,
+            co2Avoided: 3.4,
+            products: {
+              briquette: 400,
+              compost: 500,
+              biochar: 200,
+              ecoProduct: 150
+            },
+            contributions: [
+              { date: "12/08/2024", type: "Coffee Waste", weight: 25, status: "Verified", impact: 0.06 },
+              { date: "10/08/2024", type: "Coffee Waste", weight: 20, status: "Verified", impact: 0.05 },
+              { date: "05/08/2024", type: "Coffee Waste", weight: 30, status: "Verified", impact: 0.07 },
+              { date: "01/08/2024", type: "Coffee Waste", weight: 22, status: "Verified", impact: 0.05 }
+            ]
+          }
+        },
+        "warung@abc.com": {
+          password: "warung123",
+          name: "Warung Kopi ABC",
+          roles: ["contributor"],
+          contributorData: {
+            name: "Warung Kopi ABC",
+            impactLevel: "SILVER ⭐⭐",
+            wasteContributed: 850,
+            co2Avoided: 2.1,
+            products: {
+              briquette: 280,
+              compost: 340,
+              biochar: 140,
+              ecoProduct: 90
+            },
+            contributions: [
+              { date: "15/08/2024", type: "Coffee Waste", weight: 18, status: "Verified", impact: 0.04 },
+              { date: "12/08/2024", type: "Coffee Waste", weight: 22, status: "Verified", impact: 0.05 }
+            ]
+          }
+        },
+        "operator@rebru.com": {
+          password: "operator123",
+          name: "Internal Operator",
+          roles: ["internal_operator"]
+        },
+        "management@rebru.com": {
+          password: "mgmt123",
+          name: "Management Team",
+          roles: ["management"]
+        },
+        "investor@company.com": {
+          password: "investor123",
+          name: "CSR Investor",
+          roles: ["csr_investor"]
+        },
+        "admin@rebru.com": {
+          password: "admin123",
+          name: "Admin User",
+          roles: ["internal_operator", "management"]
+        }
+      };
+
+      // ==========================================
+      // MODAL FUNCTIONS
+      // ==========================================
+      function openAuthModal() {
+        document.getElementById('authModal').classList.add('show');
+        document.getElementById('loginFormContainer').style.display = 'block';
+        document.getElementById('roleSelectionContainer').classList.remove('show');
+      }
+
+      function closeAuthModal() {
+        document.getElementById('authModal').classList.remove('show');
+        document.getElementById('emailInput').value = '';
+        document.getElementById('passwordInput').value = '';
+      }
+
+      // ==========================================
+      // LOGIN HANDLER
+      // ==========================================
+      function handleLoginSubmit(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('emailInput').value;
+        const password = document.getElementById('passwordInput').value;
+        const user = usersDatabase[email];
+        
+        if (!user || user.password !== password) {
+          alert('Email or Password is incorrect');
+          return;
+        }
+        
+        // Check if multi-role
+        if (user.roles.length > 1) {
+          showRoleSelection(user, email);
+        } else {
+          loginUser(user, user.roles[0], email);
+        }
+      }
+
+      // ==========================================
+      // ROLE SELECTION
+      // ==========================================
+      function showRoleSelection(user, email) {
+        document.getElementById('loginFormContainer').style.display = 'none';
+        document.getElementById('roleSelectionContainer').classList.add('show');
+        document.getElementById('roleUserName').textContent = user.name;
+        
+        const roleOptionsContainer = document.getElementById('roleOptionsContainer');
+        roleOptionsContainer.innerHTML = '';
+        
+        const roleDescriptions = {
+          contributor: { title: 'Contributor', desc: 'View your personal impact data' },
+          internal_operator: { title: 'Internal Operator', desc: 'Monitor all contributors' },
+          management: { title: 'Management', desc: 'Executive dashboard view' },
+          csr_investor: { title: 'CSR / Investor', desc: 'Public sustainability reports' }
+        };
+        
+        user.roles.forEach(role => {
+          const roleDiv = document.createElement('div');
+          roleDiv.className = 'role-option';
+          roleDiv.innerHTML = `
+            <h3>${roleDescriptions[role].title}</h3>
+            <p>${roleDescriptions[role].desc}</p>
+          `;
+          roleDiv.onclick = () => loginUser(user, role, email);
+          roleOptionsContainer.appendChild(roleDiv);
+        });
+      }
+
+      // ==========================================
+      // LOGIN USER & STORE SESSION
+      // ==========================================
+      function loginUser(user, selectedRole, email) {
+        const sessionData = {
+          email: email,
+          name: user.name,
+          currentRole: selectedRole,
+          availableRoles: user.roles,
+          loginTime: Date.now()
+        };
+        
+        if (selectedRole === 'contributor') {
+          sessionData.contributorData = user.contributorData;
+        }
+        
+        localStorage.setItem('currentUser', JSON.stringify(sessionData));
+        
+        closeAuthModal();
+        showDashboard(sessionData);
+      }
+
+      // ==========================================
+      // SESSION MANAGEMENT
+      // ==========================================
+      function checkSession() {
+        const userStr = localStorage.getItem('currentUser');
+        if (!userStr) return false;
+        
+        const user = JSON.parse(userStr);
+        const oneHour = 60 * 60 * 1000;
+        
+        if (Date.now() - user.loginTime > oneHour) {
+          alert('Session expired. Please login again.');
+          handleLogout();
+          return false;
+        }
+        return true;
+      }
+
+      function initSession() {
+        if (checkSession()) {
+          const user = JSON.parse(localStorage.getItem('currentUser'));
+          showDashboard(user);
+        }
+      }
+
+      // ==========================================
+      // LOGOUT
+      // ==========================================
+      function handleLogout() {
+        localStorage.removeItem('currentUser');
+        backToHome();
+        alert('You have been logged out successfully');
+      }
+
+      function backToHome() {
+        // Hide dashboard, show landing
+        document.getElementById('dashboardView').classList.remove('active');
+        document.getElementById('homeView').style.display = 'block';
+        
+        // Switch headers
+        document.getElementById('mainHeader').style.display = 'block';
+        document.getElementById('dashboardHeader').style.display = 'none';
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // ==========================================
+      // SHOW DASHBOARD
+      // ==========================================
+      function showDashboard(user) {
+        // Hide landing, show dashboard
+        document.getElementById('homeView').style.display = 'none';
+        document.getElementById('dashboardView').classList.add('active');
+        
+        // Switch headers
+        document.getElementById('mainHeader').style.display = 'none';
+        document.getElementById('dashboardHeader').style.display = 'block';
+        
+        // Update user badge
+        document.getElementById('userName').textContent = user.name;
+        document.getElementById('userRole').textContent = getRoleLabel(user.currentRole);
+        
+        // Load dashboard content based on role
+        switch(user.currentRole) {
+          case 'contributor':
+            loadContributorDashboard(user.contributorData);
+            break;
+          case 'internal_operator':
+            loadOperatorDashboard();
+            break;
+          case 'management':
+            loadManagementDashboard();
+            break;
+          case 'csr_investor':
+            loadInvestorDashboard();
+            break;
+        }
+        
+        // Initialize tab switching
+        initTabSwitching();
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function getRoleLabel(role) {
+        const labels = {
+          contributor: 'Contributor',
+          internal_operator: 'Internal Operator',
+          management: 'Management',
+          csr_investor: 'CSR / Investor'
+        };
+        return labels[role] || role;
+      }
+
+      // ==========================================
+      // TAB SWITCHING
+      // ==========================================
+      function initTabSwitching() {
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+            
+            // Remove active from all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+              tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            tabBtns.forEach(b => b.classList.remove('active'));
+            
+            // Activate selected tab
+            const targetTab = document.getElementById('tab-' + tabName);
+            if (targetTab) {
+              targetTab.classList.add('active');
+            }
+            
+            this.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        });
+      }
+
+      // ==========================================
+      // DASHBOARD LOADERS (akan dilanjutkan di message berikutnya)
+      // ==========================================
+      function loadContributorDashboard(data) {
+        // Show certificate tab for contributors
+        document.getElementById('certificateTab').classList.remove('hidden');
+        
+        const content = `
+          <div id="tab-home" class="tab-content active">
+            <div class="dashboard-welcome">
+              <h2>Welcome, ${data.name}</h2>
+              <div class="impact-level">Impact Level: <strong>${data.impactLevel}</strong></div>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <h3>Total Waste Contributed</h3>
+                <div class="value">${data.wasteContributed.toLocaleString()} <span class="unit">kg</span></div>
+              </div>
+              <div class="stat-card">
+                <h3>CO₂e Avoided</h3>
+                <div class="value">${data.co2Avoided} <span class="unit">ton</span></div>
+              </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px; color: var(--primary-green-dark); font-family: var(--font-heading);">Products Generated</h3>
+            <div class="products-grid">
+              <div class="product-item">
+                <i class="fas fa-fire"></i>
+                <h4>Briquette</h4>
+                <p>${data.products.briquette} kg</p>
+              </div>
+              <div class="product-item">
+                <i class="fas fa-seedling"></i>
+                <h4>Compost</h4>
+                <p>${data.products.compost} kg</p>
+              </div>
+              <div class="product-item">
+                <i class="fas fa-mountain"></i>
+                <h4>Biochar</h4>
+                <p>${data.products.biochar} kg</p>
+              </div>
+              <div class="product-item">
+                <i class="fas fa-leaf"></i>
+                <h4>Eco Product</h4>
+                <p>${data.products.ecoProduct} kg</p>
+              </div>
+            </div>
+
+            <div class="action-buttons">
+              <button class="btn-dashboard btn-dashboard-primary" onclick="switchToTab('esg')">
+                <i class="fas fa-chart-bar"></i> View ESG Report
+              </button>
+              <button class="btn-dashboard btn-dashboard-secondary" onclick="switchToTab('certificate')">
+                <i class="fas fa-download"></i> Download Certificate
+              </button>
+            </div>
+          </div>
+
+          <div id="tab-log" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Contribution Log</h2>
+            <div class="data-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Waste Type</th>
+                    <th>Weight</th>
+                    <th>Status</th>
+                    <th>Impact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${data.contributions.map(c => `
+                    <tr>
+                      <td>${c.date}</td>
+                      <td>${c.type}</td>
+                      <td>${c.weight} kg</td>
+                      <td class="status-verified">✓ ${c.status}</td>
+                      <td>${c.impact} ton CO₂e</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+            <div class="action-buttons">
+              <button class="btn-dashboard btn-dashboard-primary">
+                <i class="fas fa-filter"></i> Filter Data
+              </button>
+              <button class="btn-dashboard btn-dashboard-secondary">
+                <i class="fas fa-file-excel"></i> Export to Excel
+              </button>
+            </div>
+          </div>
+
+          <div id="tab-impact" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Impact Breakdown</h2>
+            
+            <div class="esg-section">
+              <h3>Waste Input: ${data.wasteContributed.toLocaleString()} kg</h3>
+              <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 12px; font-size: 1.05rem;">
+                  <i class="fas fa-arrow-right"></i> Briquette: <strong>${data.products.briquette} kg</strong>
+                </li>
+                <li style="margin-bottom: 12px; font-size: 1.05rem;">
+                  <i class="fas fa-arrow-right"></i> Compost: <strong>${data.products.compost} kg</strong>
+                </li>
+                <li style="margin-bottom: 12px; font-size: 1.05rem;">
+                  <i class="fas fa-arrow-right"></i> Biochar: <strong>${data.products.biochar} kg</strong>
+                </li>
+                <li style="margin-bottom: 12px; font-size: 1.05rem;">
+                  <i class="fas fa-arrow-right"></i> Eco-product: <strong>${data.products.ecoProduct} kg</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div class="esg-section">
+              <h3>Emission Avoidance Logic</h3>
+              <p><strong>Landfill Avoided:</strong> ${data.wasteContributed.toLocaleString()} kg waste diverted from landfill</p>
+              <p><strong>Fuel Substituted:</strong> Briquettes replace ${Math.round(data.products.briquette * 0.8)} kg of coal</p>
+              <p><strong>Carbon Sequestration:</strong> Biochar stores ${(data.products.biochar * 0.002).toFixed(1)} ton CO₂e</p>
+              <p><strong>Total Impact:</strong> <span style="color: var(--primary-green); font-weight: 700; font-size: 1.3rem;">${data.co2Avoided} ton CO₂e avoided</span></p>
+            </div>
+          </div>
+
+          <div id="tab-esg" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">ESG Scorecard</h2>
+
+            <div class="esg-section">
+              <h3>ENVIRONMENT (E) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Waste Diverted:</strong> ${data.wasteContributed.toLocaleString()} kg</p>
+              <p><strong>CO₂e Avoided:</strong> ${data.co2Avoided} ton</p>
+              <p><strong>Resource Recovery Rate:</strong> 96%</p>
+            </div>
+
+            <div class="esg-section">
+              <h3>SOCIAL (S) <span class="score-badge score-b">Score: B</span></h3>
+              <p><strong>Participation:</strong> Active contributor since Jan 2024</p>
+              <p><strong>Community Programs:</strong> Joined 3 sustainability initiatives</p>
+              <p><strong>Local Impact:</strong> Supporting 5 local waste collectors</p>
+            </div>
+
+            <div class="esg-section">
+              <h3>GOVERNANCE (G) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Data Verification:</strong> 100% verified transactions</p>
+              <p><strong>Traceability:</strong> Full blockchain-backed tracking</p>
+              <p><strong>Compliance:</strong> Meets ISO 14001 standards</p>
+            </div>
+          </div>
+
+          <div id="tab-report" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Report & Export Center</h2>
+            
+            <div class="esg-section">
+              <h3>Available Reports</h3>
+              <div class="action-buttons">
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-file-pdf"></i> Download ESG Summary (PDF)
+                </button>
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-file-alt"></i> Download CSR Appendix (PDF)
+                </button>
+                <button class="btn-dashboard btn-dashboard-secondary">
+                  <i class="fas fa-file-excel"></i> Download Data Table (Excel)
+                </button>
+              </div>
+            </div>
+
+            <div class="esg-section">
+              <h3>Report Settings</h3>
+              <p><strong>Period:</strong> January - December 2024</p>
+              <p><strong>Language:</strong> English / Bahasa Indonesia</p>
+              <p><strong>Format:</strong> PDF / Excel</p>
+            </div>
+          </div>
+
+          <div id="tab-certificate" class="tab-content">
+            <div class="certificate-container">
+              <h2>🏆 IMPACT CERTIFICATE</h2>
+              <div class="org-name">${data.name}</div>
+              
+              <div class="certificate-details">
+                <p><strong>Waste Contributed:</strong> ${data.wasteContributed.toLocaleString()} kg</p>
+                <p><strong>Emission Avoided:</strong> ${data.co2Avoided} ton CO₂e</p>
+                <p><strong>Period:</strong> January - December 2024</p>
+                <p><strong>Verified by:</strong> Rebru Impact System</p>
+              </div>
+
+              <div class="action-buttons" style="justify-content: center;">
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-download"></i> Download PDF
+                </button>
+                <button class="btn-dashboard btn-dashboard-secondary">
+                  <i class="fas fa-share-alt"></i> Share Link
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('dashboardContentArea').innerHTML = content;
+      }
+
+      function loadOperatorDashboard() {
+        document.getElementById('certificateTab').classList.add('hidden');
+        
+        const allContributors = Object.values(usersDatabase).filter(u => u.roles.includes('contributor'));
+        const totalWaste = allContributors.reduce((sum, u) => sum + (u.contributorData?.wasteContributed || 0), 0);
+        const totalCO2 = allContributors.reduce((sum, u) => sum + (u.contributorData?.co2Avoided || 0), 0);
+        
+        const content = `
+          <div id="tab-home" class="tab-content active">
+            <div class="dashboard-welcome">
+              <h2>Internal Operator Dashboard</h2>
+              <p>Monitor all contributors and verify contributions</p>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <h3>Total Contributors</h3>
+                <div class="value">${allContributors.length}</div>
+              </div>
+              <div class="stat-card">
+                <h3>Total Waste Collected</h3>
+                <div class="value">${totalWaste.toLocaleString()} <span class="unit">kg</span></div>
+              </div>
+              <div class="stat-card">
+                <h3>Total CO₂e Avoided</h3>
+                <div class="value">${totalCO2.toFixed(1)} <span class="unit">ton</span></div>
+              </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px; color: var(--primary-green-dark); font-family: var(--font-heading);">All Contributors</h3>
+            ${allContributors.map(u => `
+              <div class="contributor-card">
+                <h3>${u.contributorData.name}</h3>
+                <div class="contributor-stats">
+                  <div>
+                    <small>Impact Level</small>
+                    <strong>${u.contributorData.impactLevel}</strong>
+                  </div>
+                  <div>
+                    <small>Waste</small>
+                    <strong>${u.contributorData.wasteContributed} kg</strong>
+                  </div>
+                  <div>
+                    <small>CO₂e Avoided</small>
+                    <strong>${u.contributorData.co2Avoided} ton</strong>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div id="tab-log" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">All Contributions Log</h2>
+            <div class="data-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Contributor</th>
+                    <th>Date</th>
+                    <th>Waste Type</th>
+                    <th>Weight</th>
+                    <th>Status</th>
+                    <th>Impact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${allContributors.flatMap(u => 
+                    u.contributorData.contributions.map(c => `
+                      <tr>
+                        <td>${u.contributorData.name}</td>
+                        <td>${c.date}</td>
+                        <td>${c.type}</td>
+                        <td>${c.weight} kg</td>
+                        <td class="status-verified">✓ ${c.status}</td>
+                        <td>${c.impact} ton CO₂e</td>
+                      </tr>
+                    `)
+                  ).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="tab-impact" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Company-wide Impact</h2>
+            <div class="esg-section">
+              <h3>Total Waste Input: ${totalWaste.toLocaleString()} kg</h3>
+              <p>Total CO₂e Avoided: <strong style="color: var(--primary-green); font-size: 1.5rem;">${totalCO2.toFixed(1)} ton</strong></p>
+              <p>Active Contributors: ${allContributors.length}</p>
+            </div>
+          </div>
+
+          <div id="tab-esg" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Company ESG Overview</h2>
+            <div class="esg-section">
+              <h3>ENVIRONMENT (E) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Total Waste Diverted:</strong> ${totalWaste.toLocaleString()} kg</p>
+              <p><strong>Total CO₂e Avoided:</strong> ${totalCO2.toFixed(1)} ton</p>
+            </div>
+          </div>
+
+          <div id="tab-report" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Export All Data</h2>
+            <div class="esg-section">
+              <div class="action-buttons">
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-file-excel"></i> Export All Contributions (Excel)
+                </button>
+                <button class="btn-dashboard btn-dashboard-secondary">
+                  <i class="fas fa-file-pdf"></i> Generate Consolidated Report (PDF)
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('dashboardContentArea').innerHTML = content;
+      }
+
+      function loadManagementDashboard() {
+        document.getElementById('certificateTab').classList.add('hidden');
+        
+        const allContributors = Object.values(usersDatabase).filter(u => u.roles.includes('contributor'));
+        const totalWaste = allContributors.reduce((sum, u) => sum + (u.contributorData?.wasteContributed || 0), 0);
+        const totalCO2 = allContributors.reduce((sum, u) => sum + (u.contributorData?.co2Avoided || 0), 0);
+        
+        const content = `
+          <div id="tab-home" class="tab-content active">
+            <div class="dashboard-welcome">
+              <h2>Executive Dashboard</h2>
+              <p>Strategic overview of sustainability impact</p>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <h3>Total Impact</h3>
+                <div class="value">${totalCO2.toFixed(1)} <span class="unit">ton CO₂e</span></div>
+              </div>
+              <div class="stat-card">
+                <h3>Waste Processed</h3>
+                <div class="value">${totalWaste.toLocaleString()} <span class="unit">kg</span></div>
+              </div>
+              <div class="stat-card">
+                <h3>Active Contributors</h3>
+                <div class="value">${allContributors.length}</div>
+              </div>
+              <div class="stat-card">
+                <h3>Growth Rate</h3>
+                <div class="value">+24% <span class="unit">YoY</span></div>
+              </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px; color: var(--primary-green-dark); font-family: var(--font-heading);">Top Performers (Click to drill-down)</h3>
+            ${allContributors.sort((a, b) => b.contributorData.co2Avoided - a.contributorData.co2Avoided).map(u => `
+              <div class="contributor-card" onclick="alert('Drill-down to ${u.contributorData.name} details')">
+                <h3>${u.contributorData.name}</h3>
+                <div class="contributor-stats">
+                  <div>
+                    <small>Impact Level</small>
+                    <strong>${u.contributorData.impactLevel}</strong>
+                  </div>
+                  <div>
+                    <small>Waste</small>
+                    <strong>${u.contributorData.wasteContributed} kg</strong>
+                  </div>
+                  <div>
+                    <small>CO₂e Avoided</small>
+                    <strong>${u.contributorData.co2Avoided} ton</strong>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div id="tab-log" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Activity Overview</h2>
+            <div class="esg-section">
+              <p>Total transactions: <strong>${allContributors.reduce((sum, u) => sum + u.contributorData.contributions.length, 0)}</strong></p>
+              <p>Verification rate: <strong>100%</strong></p>
+            </div>
+          </div>
+
+          <div id="tab-impact" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Impact Analysis</h2>
+            <div class="esg-section">
+              <h3>Company-wide Environmental Impact</h3>
+              <p><strong>Total Waste Diverted:</strong> ${totalWaste.toLocaleString()} kg</p>
+              <p><strong>Total CO₂e Avoided:</strong> ${totalCO2.toFixed(1)} ton</p>
+              <p><strong>Equivalent to:</strong> ${Math.round(totalCO2 * 450)} trees planted</p>
+            </div>
+          </div>
+
+          <div id="tab-esg" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">ESG Scorecard (Company-wide)</h2>
+            <div class="esg-section">
+              <h3>ENVIRONMENT (E) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Waste Diverted:</strong> ${totalWaste.toLocaleString()} kg</p>
+              <p><strong>CO₂e Avoided:</strong> ${totalCO2.toFixed(1)} ton</p>
+            </div>
+            <div class="esg-section">
+              <h3>SOCIAL (S) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Contributors Engaged:</strong> ${allContributors.length}</p>
+              <p><strong>Community Impact:</strong> High</p>
+            </div>
+            <div class="esg-section">
+              <h3>GOVERNANCE (G) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Data Verification:</strong> 100%</p>
+              <p><strong>Traceability:</strong> Full</p>
+            </div>
+          </div>
+
+          <div id="tab-report" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Strategic Reports</h2>
+            <div class="esg-section">
+              <div class="action-buttons">
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-file-pdf"></i> Download Executive Summary
+                </button>
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-file-pdf"></i> Download Sustainability Report
+                </button>
+                <button class="btn-dashboard btn-dashboard-secondary">
+                  <i class="fas fa-file-excel"></i> Export All Data (Excel)
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('dashboardContentArea').innerHTML = content;
+      }
+
+      function loadInvestorDashboard() {
+        document.getElementById('certificateTab').classList.add('hidden');
+        
+        const allContributors = Object.values(usersDatabase).filter(u => u.roles.includes('contributor'));
+        const totalWaste = allContributors.reduce((sum, u) => sum + (u.contributorData?.wasteContributed || 0), 0);
+        const totalCO2 = allContributors.reduce((sum, u) => sum + (u.contributorData?.co2Avoided || 0), 0);
+        
+        const content = `
+          <div id="tab-home" class="tab-content active">
+            <div class="dashboard-welcome">
+              <h2>CSR / Investor View</h2>
+              <p>Public sustainability metrics and verified data</p>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <h3>Verified Impact</h3>
+                <div class="value">${totalCO2.toFixed(1)} <span class="unit">ton CO₂e</span></div>
+              </div>
+              <div class="stat-card">
+                <h3>Waste Processed</h3>
+                <div class="value">${totalWaste.toLocaleString()} <span class="unit">kg</span></div>
+              </div>
+              <div class="stat-card">
+                <h3>Contributors</h3>
+                <div class="value">${allContributors.length}</div>
+              </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px; color: var(--primary-green-dark); font-family: var(--font-heading);">Individual Contributors</h3>
+            ${allContributors.map(u => `
+              <div class="contributor-card">
+                <h3>${u.contributorData.name}</h3>
+                <div class="contributor-stats">
+                  <div>
+                    <small>Impact Level</small>
+                    <strong>${u.contributorData.impactLevel}</strong>
+                  </div>
+                  <div>
+                    <small>Waste Contributed</small>
+                    <strong>${u.contributorData.wasteContributed} kg</strong>
+                  </div>
+                  <div>
+                    <small>CO₂e Avoided</small>
+                    <strong>${u.contributorData.co2Avoided} ton</strong>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div id="tab-log" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Verified Contributions</h2>
+            <div class="data-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Contributor</th>
+                    <th>Date</th>
+                    <th>Waste Type</th>
+                    <th>Weight</th>
+                    <th>Impact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${allContributors.flatMap(u => 
+                    u.contributorData.contributions.map(c => `
+                      <tr>
+                        <td>${u.contributorData.name}</td>
+                        <td>${c.date}</td>
+                        <td>${c.type}</td>
+                        <td>${c.weight} kg</td>
+                        <td>${c.impact} ton CO₂e</td>
+                      </tr>
+                    `)
+                  ).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="tab-impact" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Verified Impact Data</h2>
+            <div class="esg-section">
+              <h3>Environmental Impact (Verified)</h3>
+              <p><strong>Total Waste Diverted:</strong> ${totalWaste.toLocaleString()} kg</p>
+              <p><strong>Total CO₂e Avoided:</strong> ${totalCO2.toFixed(1)} ton</p>
+              <p><strong>Verification Status:</strong> <span class="status-verified">✓ 100% Verified</span></p>
+            </div>
+          </div>
+
+          <div id="tab-esg" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">ESG Performance</h2>
+            <div class="esg-section">
+              <h3>ENVIRONMENT (E) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Waste Diverted:</strong> ${totalWaste.toLocaleString()} kg (Verified)</p>
+              <p><strong>CO₂e Avoided:</strong> ${totalCO2.toFixed(1)} ton (Verified)</p>
+            </div>
+            <div class="esg-section">
+              <h3>SOCIAL (S) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Community Engagement:</strong> Active</p>
+              <p><strong>Contributor Network:</strong> ${allContributors.length} partners</p>
+            </div>
+            <div class="esg-section">
+              <h3>GOVERNANCE (G) <span class="score-badge score-a">Score: A</span></h3>
+              <p><strong>Transparency:</strong> Full traceability</p>
+              <p><strong>Verification:</strong> 100% verified data</p>
+            </div>
+          </div>
+
+          <div id="tab-report" class="tab-content">
+            <h2 style="margin-bottom: 25px; color: var(--primary-green-dark); font-family: var(--font-heading);">Public Reports</h2>
+            <div class="esg-section">
+              <div class="action-buttons">
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-file-pdf"></i> Download Sustainability Report
+                </button>
+                <button class="btn-dashboard btn-dashboard-primary">
+                  <i class="fas fa-file-pdf"></i> Download ESG Summary
+                </button>
+              </div>
+              <p style="margin-top: 20px; color: var(--text-light);"><em>Read-only access • All data is verified and auditable</em></p>
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('dashboardContentArea').innerHTML = content;
+      }
+
+      // Helper function to switch tabs programmatically
+      function switchToTab(tabName) {
+        const tabBtn = document.querySelector(`[data-tab="${tabName}"]`);
+        if (tabBtn) {
+          tabBtn.click();
+        }
+      }
+
+      // Initialize on page load
+      window.addEventListener('DOMContentLoaded', function() {
+        initSession();
       });
     </script>
   </body>
 </html>
-
